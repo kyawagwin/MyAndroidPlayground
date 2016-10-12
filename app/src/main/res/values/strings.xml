@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">My Android Playground</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="action_album_list_item_addFavourite">Add to Favourites</string>
+    <string name="action_album_list_item_playNext">Play Next</string>
+
+    <string name="album_list_backdrop_title">LOVE MUSIC</string>
+    <string name="album_list_backdrop_subtitle">This season top 20 albums</string>
+
+    <string name="album_overflow_contentDescription">More</string>
+
+    <string name="album_list_title">Album List</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.passioncreativestudio.myandroidplayground;
+package com.passioncreativestudio.myandroidplayground.models;
 
 public class Customer {
     private String name;

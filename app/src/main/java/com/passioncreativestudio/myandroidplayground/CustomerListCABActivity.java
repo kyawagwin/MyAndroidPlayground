@@ -14,6 +14,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.passioncreativestudio.myandroidplayground.adapters.CustomersAdapter;
+import com.passioncreativestudio.myandroidplayground.models.Customer;
+
 import java.util.HashSet;
 
 public class CustomerListCABActivity extends AppCompatActivity {
@@ -29,7 +32,7 @@ public class CustomerListCABActivity extends AppCompatActivity {
 
         customersListView = (ListView) findViewById(R.id.activity_customer_list_cab_listView);
         selectedCustomers = new HashSet<>();
-        customersAdapter = new CustomersAdapter();
+        customersAdapter = new CustomersAdapter(this, R.layout.list_item_customer);
 
         for(int i = 0; i < 100; i++) {
             customersAdapter.add(new Customer("Customer " + Integer.toString(i + 1)));
@@ -115,22 +118,6 @@ public class CustomerListCABActivity extends AppCompatActivity {
 
         customersAdapter.notifyDataSetChanged();
     }
-
-
-    //region Class Adapter
-    private class CustomersAdapter extends ArrayAdapter<Customer> {
-        public CustomersAdapter() {
-            super(CustomerListCABActivity.this, R.layout.list_item_customer);
-        }
-
-        @NonNull
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            return super.getView(position, convertView, parent);
-        }
-    }
-    //endregion
-
 
     //region Class ActionMode.Callback
     private class CustomerActionModeCallback implements ActionMode.Callback {
