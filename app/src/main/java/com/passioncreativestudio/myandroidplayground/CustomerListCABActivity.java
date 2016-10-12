@@ -1,5 +1,7 @@
 package com.passioncreativestudio.myandroidplayground;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,7 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.passioncreativestudio.myandroidplayground.adapters.CustomersAdapter;
 import com.passioncreativestudio.myandroidplayground.models.Customer;
 
 import java.util.HashSet;
@@ -32,7 +33,7 @@ public class CustomerListCABActivity extends AppCompatActivity {
 
         customersListView = (ListView) findViewById(R.id.activity_customer_list_cab_listView);
         selectedCustomers = new HashSet<>();
-        customersAdapter = new CustomersAdapter(this, R.layout.list_item_customer);
+        customersAdapter = new CustomersAdapter();
 
         for(int i = 0; i < 100; i++) {
             customersAdapter.add(new Customer("Customer " + Integer.toString(i + 1)));
@@ -74,7 +75,7 @@ public class CustomerListCABActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.menu_customer_list_cab_addCustomer) {
-            customersAdapter.insert(new Customer("Inserted Customer " + Integer.toString(customersAdapter.getCount())), 0);
+            customersAdapter.insert(new Customer("Inserted Customer " + Integer.toString(customersAdapter.getCount() + 1)), 0);
             customersAdapter.notifyDataSetChanged();
 
             return true;
@@ -119,27 +120,79 @@ public class CustomerListCABActivity extends AppCompatActivity {
         customersAdapter.notifyDataSetChanged();
     }
 
+
+    private class CustomersAdapter extends ArrayAdapter<Customer> {
+
+
+        public CustomersAdapter() {
+            super(CustomerListCABActivity.this, R.layout.list_item_customer);
+        }
+
+        @NonNull
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view = super.getView(position, convertView, parent);
+            Customer customer = getItem(position);
+
+            if(selectedCustomers.contains(customer)) {
+                view.setBackgroundColor(Color.parseColor("#B2EBF2"));
+            } else {
+                view.setBackground(null);
+            }
+
+            return view;
+        }
+    }
+
+
+
     //region Class ActionMode.Callback
     private class CustomerActionModeCallback implements ActionMode.Callback {
 
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-            return false;
+            getMenuInflater().inflate(R.menu.menu_customer_list_cab_action, menu);
+            return true;
         }
 
         @Override
         public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-            return false;
+            if(selectedCustomers.size() == 1) {
+                menu.setGroupVisible(R.id.menu_customer_list_singleOnlyGroup, true);
+            } else {
+                menu.setGroupVisible(R.id.menu_customer_list_singleOnlyGroup, false);
+            }
+
+            return true;
         }
 
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-            return false;
+            int id = item.getItemId();
+
+            if(id == R.id.menu_customer_list_delete) {
+                deleteCustomers(selectedCustomers);
+                actionMode.finish();
+                return true;
+            }
+
+            if(id == R.id.menu_customer_list_show) {
+                if(selectedCustomers.size() != 1)
+                    throw new RuntimeException("The show button on CAB may only be pressed if one customer is selected!");
+
+                Customer customer = selectedCustomers.iterator().next();
+                showCustomer(customer);
+                actionMode.finish();
+            }
+
+            return true;
         }
 
         @Override
         public void onDestroyActionMode(ActionMode mode) {
-
+            CustomerListCABActivity.this.actionMode = null;
+            selectedCustomers.clear();
+            customersAdapter.notifyDataSetChanged();
         }
     }
     //endregion

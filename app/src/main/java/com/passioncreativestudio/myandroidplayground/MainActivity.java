@@ -8,6 +8,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button recyclerViewBtn;
+    private Button CABBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,7 +16,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         recyclerViewBtn = (Button) findViewById(R.id.activity_main_recyclerViewBtn);
+        CABBtn = (Button) findViewById(R.id.activity_main_CABBtn);
+
         recyclerViewBtn.setOnClickListener(this);
+        CABBtn.setOnClickListener(this);
     }
 
     @Override
@@ -26,10 +30,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.activity_main_recyclerViewBtn:
                 intent = new Intent(this, AlbumListActivity.class);
                 startActivity(intent);
+                finish();
                 return;
             case R.id.activity_main_CABBtn:
                 intent = new Intent(this, CustomerListCABActivity.class);
                 startActivity(intent);
+                finish();
+                return;
             default:
         }
     }

@@ -17,6 +17,7 @@
         android:layout_height="wrap_content" />
 
     <Button
+        android:layout_below="@id/activity_main_CABBtn"
         android:text="Sample Recycler View"
         android:id="@+id/activity_main_recyclerViewBtn"
         android:layout_width="match_parent"
