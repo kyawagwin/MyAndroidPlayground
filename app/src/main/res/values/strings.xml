@@ -11,4 +11,7 @@
     <string name="album_overflow_contentDescription">More</string>
 
     <string name="album_list_title">Album List</string>
+    <string name="title_activity_tabbed">Tabbed Activity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_tabBar">Tab Bar Activity</string>
 </resources>
