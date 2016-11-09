@@ -12,7 +12,14 @@
     <ImageView
         android:layout_gravity="center"
         android:id="@+id/activity_take_picture_imageView"
-        android:layout_width="64dp"
-        android:layout_height="64dp" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/activity_take_picture_uploadImage"
+        android:text="Upload Image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
 
 </LinearLayout>
