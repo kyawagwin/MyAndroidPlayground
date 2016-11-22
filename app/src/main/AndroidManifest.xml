@@ -63,7 +63,15 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
+        <activity
+            android:name=".GpToolbarActivity"
+            android:label="@string/title_activity_gp_toolbar"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".CrescentoActivity" />
+
+        <service android:name=".FetchAddressIntentService" android:exported="false" />
+
     </application>
 
 </manifest>

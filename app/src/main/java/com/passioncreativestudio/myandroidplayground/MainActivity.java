@@ -11,6 +11,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button CABBtn;
     private Button takePictureButton;
     private Button openMapButton;
+    private Button crescentoButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,11 +22,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         CABBtn = (Button) findViewById(R.id.activity_main_CABBtn);
         takePictureButton = (Button) findViewById(R.id.activity_main_takePictureButton);
         openMapButton = (Button) findViewById(R.id.activity_main_openMapButton);
+        crescentoButton = (Button) findViewById(R.id.activity_main_crescentoButton);
 
         recyclerViewBtn.setOnClickListener(this);
         CABBtn.setOnClickListener(this);
         takePictureButton.setOnClickListener(this);
         openMapButton.setOnClickListener(this);
+        crescentoButton.setOnClickListener(this);
     }
 
     @Override
@@ -44,9 +47,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.activity_main_takePictureButton:
                 intent = new Intent(this, TakePhotoActivity.class);
                 startActivity(intent);
+                return;
             case R.id.activity_main_openMapButton:
                 intent = new Intent(this, MapsActivity.class);
                 startActivity(intent);
+                return;
+            case R.id.activity_main_crescentoButton:
+                intent = new Intent(this, CrescentoActivity.class);
+                startActivity(intent);
+                return;
             default:
         }
     }
